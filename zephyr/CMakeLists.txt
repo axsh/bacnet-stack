@@ -413,6 +413,7 @@ list(
       ${BACNETSTACK_PORT}/event.c
       $<$<BOOL:${CONFIG_BSC_WEBSOCKET_CLIENT}>:${BACNETSTACK_PORT}/websocket-cli.c>
       $<$<BOOL:${CONFIG_BSC_WEBSOCKET_SERVER}>:${BACNETSTACK_PORT}/websocket-srv.c>
+      $<$<BOOL:${CONFIG_BSC_WEBSOCKET_SERVER}>:${BACNETSTACK_PORT}/libc_extensions.c>
   )
 
 

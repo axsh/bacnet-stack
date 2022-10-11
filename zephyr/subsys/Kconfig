@@ -5,14 +5,24 @@
 
 comment "BACnet Subsystems"
 
-config BSC_WEBSOCKET
-    bool "BSC_WEBSOCKET"
-    default y
+config BSC_WEBSOCKET_CLIENT
+    bool "BSC_WEBSOCKET_CLIENT"
+    default n
     select WEBSOCKET_CLIENT
     select NET_CONTEXT_SNDTIMEO
     select TLS_CREDENTIALS
     help
-      This option enables BACnet websocket protocol
+      This option enables client of BACnet websocket protocol
+
+config BSC_WEBSOCKET_SERVER
+    bool "BSC_WEBSOCKET_SERVER"
+    default n
+    #select WEBSOCKET_CLIENT
+    #select NET_CONTEXT_SNDTIMEO
+    select CIVETWEB
+    select TLS_CREDENTIALS
+    help
+      This option enables server of BACnet websocket protocol
 
 rsource "object/Kconfig"
 rsource "server/Kconfig"
