@@ -801,15 +801,18 @@ bool bip_init(char *ifname)
         return false;
     }
     /* bind the socket to the local port number and IP address */
+    memset(&sin, 0, sizeof(sin));
     sin.sin_family = AF_INET;
-    sin.sin_addr.s_addr = htonl(INADDR_ANY);
-    sin.sin_port = BIP_Port;
-    memset(&(sin.sin_zero), '\0', sizeof(sin.sin_zero));
+    sin.sin_addr.s_addr = INADDR_ANY;
+    sin.sin_port = htons(BIP_Port);
     status =
         bind(sock_fd, (const struct sockaddr *)&sin, sizeof(struct sockaddr));
     if (status < 0) {
         close(sock_fd);
         BIP_Socket = -1;
+        if (BIP_Debug) {
+            fprintf(stderr, "Binding failed. Status=%d and errno=%d\n", status, errno);
+        }
         return false;
     }
     bvlc_init();
