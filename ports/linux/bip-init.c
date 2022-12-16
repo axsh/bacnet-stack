@@ -804,7 +804,7 @@ bool bip_init(char *ifname)
     memset(&sin, 0, sizeof(sin));
     sin.sin_family = AF_INET;
     sin.sin_addr.s_addr = INADDR_ANY;
-    sin.sin_port = htons(BIP_Port);
+    sin.sin_port = BIP_Port;
     status =
         bind(sock_fd, (const struct sockaddr *)&sin, sizeof(struct sockaddr));
     if (status < 0) {
